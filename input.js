@@ -6,28 +6,36 @@ const setupInput = function (conn) {
   stdin.setRawMode(true);
   stdin.setEncoding('utf8');
   stdin.resume();
-
+  let currentInterval;
+  const interval = 50
   const handleUserInput = function (key) {
     process.stdout.write('.');
+    if (key === "m") {
+      connection.write("Say: YAY I DID IT!");
+    }
     if (key === '\u0003') {
       console.log("exiting program");
       process.exit();
-    } else if (key === "w") {
-      setTimeout(() => {
+    } if (key === "w") {
+      clearInterval(currentInterval);
+      currentInterval = setInterval(() => {
         process.stdout.write(connection.write("Move: up"))
-      }, 50);
+      }, interval);
     } else if (key === "a") {
-      setTimeout(() => {
+      clearInterval(currentInterval);
+      currentInterval = setInterval(() => {
         process.stdout.write(connection.write("Move: left"))
-      }, 50);
+      }, interval);
     } else if (key === "s") {
-      setTimeout(() => {
+      clearInterval(currentInterval);
+      currentInterval = setInterval(() => {
         process.stdout.write(connection.write("Move: down"))
-      }, 50);
+      }, interval);
     } else if (key === "d") {
-      setTimeout(() => {
+      clearInterval(currentInterval);
+      currentInterval = setInterval(() => {
         process.stdout.write(connection.write("Move: right"))
-      }, 50);
+      }, interval);
     };
   };
   stdin.on('data', handleUserInput);
