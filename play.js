@@ -13,13 +13,10 @@ const connect = function() {
   conn.on("data", data => {
     //do smthing when i receive the data
     console.log(data);   
-  }) 
-
-
-  
+  })  
   return conn;
 
-}
+};
 
 console.log('Connecting ...');
 connect();
